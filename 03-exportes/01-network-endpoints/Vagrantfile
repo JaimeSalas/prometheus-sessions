@@ -1,0 +1,31 @@
+$prometheus_script = <<-SCRIPT
+echo Downloading Prometheus
+wget https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz
+echo Getting files
+tar xvfz prometheus-2.46.0.linux-amd64.tar.gz
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update -y
+    echo "10.0.0.10 prometheus" >> /etc/hosts
+    echo "10.0.0.11 blackbox" >> /etc/hosts
+  SHELL
+
+  config.vm.define "prometheus" do |prometheus|
+    prometheus.vm.box = "bento/ubuntu-22.04"
+    prometheus.vm.hostname = "prometheus"
+    prometheus.vm.network "private_network", ip: "10.0.0.10"  
+    prometheus.vm.provision "shell", inline: $prometheus_script
+    prometheus.vm.provider "virtualbox" do |vb|
+      vb.memory = 2024
+      vb.cpus = 1
+    end
+  end
+
+  config.vm.define "blackbox" do |blackbox|
+    blackbox.vm.box = "bento/ubuntu-22.04"
+    blackbox.vm.hostname = "blackbox"
+    blackbox.vm.network "private_network", ip: "10.0.0.11"  
+  end
+end
