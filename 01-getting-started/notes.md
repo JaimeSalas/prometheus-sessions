@@ -89,3 +89,15 @@ http_requests_total |
 http_requests_total | > <- 180x time series
 host: w01..w19 |
 host: dc1..dc9 |
+
+## Reload Config via HTTP API
+
+```bash
+./prometheus --web.enable-lifecycle
+```
+
+```bash
+curl -X POST <promtheus-api>/-/reload
+```
+
+> WARNING!!!: Cuidado quien lo puede ejecutar
