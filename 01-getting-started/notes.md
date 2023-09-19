@@ -101,3 +101,5 @@ curl -X POST <promtheus-api>/-/reload
 ```
 
 > WARNING!!!: Cuidado quien lo puede ejecutar
+
+- https://github.com/k8spatterns/examples

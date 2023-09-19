@@ -10,6 +10,14 @@ scrape_configs:
     file_sd_configs:
       - files: 
         - "web.json"
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: "go_.*"
+        action: drop      
+      - source_labels: [__name__, fstype]
+        regex: "node_filesystem_free_bytes;(.*)"
+        replacement: "${1}"
+        target_label: device
 
   - job_name: "batch"
     file_sd_configs:
@@ -19,4 +27,12 @@ scrape_configs:
       - source_labels: [runtime]
         regex: container 
         target_label: runtime
-        replacement: docker 
+        replacement: docker
+      - source_labels: [__name__]
+        regex: "go_.*"
+        action: drop 
+      - source_labels: [__name__, mountpoint]
+        regex: "node_filesystem_avail_bytes;(.*)"
+        replacement: ""
+        action: replace
+        target_label: mountpoint
