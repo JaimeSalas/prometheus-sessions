@@ -6,6 +6,9 @@ metadata:
     name: prometheus-server-conf
   namespace: monitoring
 data:
+  prometheus.rules.yml: |-
+    # Rules
+
   prometheus.yml: |-
     global:
       scrape_interval: 20s # default 1m
@@ -14,3 +17,14 @@ data:
       - job_name: "prometheus"
         static_configs:
           - targets: ["localhost:9090"]
+
+      - job_name: node-balancer
+        file_sd_configs:
+          - files: 
+            - targets.yml
+
+  targets.yml: |-
+    - labels: 
+        job: node-balancer
+      targets:
+        - 10.0.0.13:9100
