@@ -147,3 +147,4 @@ action: labeldrop
 ## References
 
 - https://www.cloudforecast.io/blog/cadvisor-and-kubernetes-monitoring-guide/
+- https://github.com/prometheus/prometheus/blob/release-2.47/documentation/examples/prometheus-kubernetes.yml
