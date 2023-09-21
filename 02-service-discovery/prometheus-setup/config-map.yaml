@@ -28,12 +28,32 @@ data:
         kubernetes_sd_configs:
           - role: node
 
+        relabel_configs:
+          - action: labelmap 
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics
+
       - job_name: k8s-hw-app-services
         kubernetes_sd_configs:
           - role: service 
             namespaces:
               names: 
                 - hwns 
+
+      - job_name: k8s-node-exporter
+        kubernetes_sd_configs:
+          - role: node 
+        relabel_configs:
+          - action: replace
+            source_labels: [__address__]
+            regex: ([^:]+)(?::\d+)?
+            replacement: '$1:9100'
+            target_label: __address__
 
       - job_name: node-balancer
         file_sd_configs:
