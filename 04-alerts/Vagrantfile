@@ -1,0 +1,42 @@
+$prometheus_script = <<-SCRIPT
+echo Downloading Prometheus
+wget https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz
+echo Getting files
+tar xvfz prometheus-2.46.0.linux-amd64.tar.gz
+SCRIPT
+
+$exporter_script = <<-SCRIPT
+echo Installing prometheus node exporter linux
+apt-get -y install prometheus-node-exporter
+
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update -y
+    echo "10.0.0.10 prometheus" >> /etc/hosts
+    echo "10.0.0.11 workernode" >> /etc/hosts
+  SHELL
+
+  config.vm.define "prometheus" do |prometheus|
+    prometheus.vm.box = "bento/ubuntu-22.04"
+    prometheus.vm.hostname = "prometheus"
+    prometheus.vm.network "private_network", ip: "10.0.0.10"  
+    prometheus.vm.provision "shell", inline: $prometheus_script
+    prometheus.vm.provider "virtualbox" do |vb|
+      vb.memory = 4048
+      vb.cpus = 2
+    end
+  end
+
+  config.vm.define "workernode" do |workernode|
+    workernode.vm.box = "bento/ubuntu-22.04"
+    workernode.vm.hostname = "workernode"
+    workernode.vm.network "private_network", ip: "10.0.0.11"  
+    workernode.vm.provision "shell", inline: $exporter_script
+    workernode.vm.provider "virtualbox" do |vb|
+      vb.memory = 1012
+      vb.cpus = 1
+    end
+  end
+end
