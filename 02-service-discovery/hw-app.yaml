@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hwns
+  labels:
+    name: hwns
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw-app-deployment
+  namespace: hwns
+  labels:
+    app: hw-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hw-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: hw-app
+    spec:
+      containers:
+        - image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
+          name: hw-ctr
+          ports:
+            - containerPort: 8080
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hw-svc
+  namespace: hwns
+spec:
+  selector:
+    app: hw-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
