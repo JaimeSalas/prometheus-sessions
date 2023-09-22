@@ -1,0 +1,59 @@
+groups:
+  - name: sample-alerts
+    rules:
+      - alert: App1Slow
+        expr: "1"
+        labels:
+          severity: warning
+          service: app1
+        annotations:
+          summary: App 1 is running slow
+      - alert: App1Down
+        expr: "1"
+        labels:
+          severity: critical
+          service: app1
+        annotations:
+          summary: App 1 is down
+      - alert: App2Down
+        expr: "1"
+        labels:
+          severity: critical
+          service: app2
+        annotations:
+          summary: App 2 is down
+      - alert: Server1LowDisk
+        expr: "1"
+        labels:
+          severity: warning
+          service: servers
+        annotations:
+          summary: Low disk space on Server 1
+      - alert: Server2LowDisk
+        expr: "1"
+        labels:
+          severity: warning
+          service: servers
+        annotations:
+          summary: Low disk space on Server 2
+      - alert: Server1Down
+        expr: "1"
+        labels:
+          severity: critical
+          service: servers
+        annotations:
+          summary: Server1 is down
+      - alert: Server2Down
+        expr: "1"
+        labels:
+          severity: critical
+          service: servers
+        annotations:
+          summary: Server 2 is down
+      - alert: NetworkDown
+        expr: "1"
+        labels:
+          severity: critical
+          service: network
+        annotations:
+          summary: Network is down
