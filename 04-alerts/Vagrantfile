@@ -3,6 +3,19 @@ echo Downloading Prometheus
 wget https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz
 echo Getting files
 tar xvfz prometheus-2.46.0.linux-amd64.tar.gz
+echo creating prometheus directory on home
+mv prometheus-2.46.0.linux-amd64 prometheus
+chown $(id -u vagrant):$(id -g vagrant) /home/vagrant/prometheus
+SCRIPT
+
+$alertmanager_script = <<-SCRIPT
+echo Downloading Alertmanager
+wget https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz
+echo Getting files
+tar xvzf alertmanager-0.26.0.linux-amd64.tar.gz
+echo creating alertmanager directory on home
+mv alertmanager-0.26.0.linux-amd64 alertmanager
+chown $(id -u vagrant):$(id -g vagrant) /home/vagrant/alertmanager
 SCRIPT
 
 $exporter_script = <<-SCRIPT
@@ -16,13 +29,15 @@ Vagrant.configure("2") do |config|
     apt-get update -y
     echo "10.0.0.10 prometheus" >> /etc/hosts
     echo "10.0.0.11 workernode" >> /etc/hosts
+    echo "10.0.0.12 alertreceiver" >> /etc/hosts
   SHELL
 
   config.vm.define "prometheus" do |prometheus|
     prometheus.vm.box = "bento/ubuntu-22.04"
     prometheus.vm.hostname = "prometheus"
-    prometheus.vm.network "private_network", ip: "10.0.0.10"  
+    prometheus.vm.network "private_network", ip: "10.0.0.10"
     prometheus.vm.provision "shell", inline: $prometheus_script
+    prometheus.vm.provision "shell", inline: $alertmanager_script
     prometheus.vm.provider "virtualbox" do |vb|
       vb.memory = 4048
       vb.cpus = 2
@@ -32,9 +47,22 @@ Vagrant.configure("2") do |config|
   config.vm.define "workernode" do |workernode|
     workernode.vm.box = "bento/ubuntu-22.04"
     workernode.vm.hostname = "workernode"
-    workernode.vm.network "private_network", ip: "10.0.0.11"  
+    workernode.vm.network "private_network", ip: "10.0.0.11"
     workernode.vm.provision "shell", inline: $exporter_script
     workernode.vm.provider "virtualbox" do |vb|
+      vb.memory = 1012
+      vb.cpus = 1
+    end
+  end
+
+  config.vm.define "alertreceiver" do |alertreceiver|
+    alertreceiver.vm.box = "bento/ubuntu-22.04"
+    alertreceiver.vm.hostname = "alertreceiver"
+    alertreceiver.vm.network "private_network", ip: "10.0.0.12"
+    alertreceiver.vm.provision "docker" do |d|
+      d.run "alertreceiver", image: "jaimesalas/webhook-receiver-server:1", args: "-p 3001:3001"
+    end
+    alertreceiver.vm.provider "virtualbox" do |vb|
       vb.memory = 1012
       vb.cpus = 1
     end

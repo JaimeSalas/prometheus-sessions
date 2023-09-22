@@ -1,0 +1,11 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: "custom-notifications"
+
+receivers:
+  - name: "custom-notifications"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert"
+        send_resolved: true
