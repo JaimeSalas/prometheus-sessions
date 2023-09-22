@@ -1,0 +1,15 @@
+global:
+
+route:
+  receiver: email-notifiactions
+
+receivers:
+  - name: email-notifiactions
+    email_configs:
+      - to: jaime.salas@lemoncode.net
+        send_resolved: true
+        from: szjaime@gmail.com
+        smarthost: smtp.gmail.com:587
+        auth_username: szjaime@gmail.com
+        auth_identity: szjaime@gmail.com
+        auth_password: "************"
