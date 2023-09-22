@@ -1,0 +1,9 @@
+route:
+  group_by: ["services"]
+  receiver: "z-alerts"
+
+receivers:
+  - name: "z-alerts"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert?stream=Alerts"
+        send_resolved: true

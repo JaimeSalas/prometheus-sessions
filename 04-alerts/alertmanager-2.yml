@@ -1,0 +1,43 @@
+route:
+  # group_by: [...]
+  receiver: "email" #default
+  routes:
+    - match:
+        service: app1
+      reciever: "z-dev-team1"
+    - match:
+        service: app2
+      reciever: "z-dev-team2"
+    - match:
+        service: servers
+      reciever: "z-server-team"
+    - match:
+        service: network
+      reciever: "z-network-team"
+
+receivers:
+  - name: "z-dev-team1"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert?stream=DevTeam1"
+        send_resolved: true
+  - name: "z-dev-team2"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert?stream=DevTeam2"
+        send_resolved: true
+  - name: "z-server-team"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert?stream=Servers"
+        send_resolved: true
+  - name: "z-network-team"
+    webhook_configs:
+      - url: "http://alertreceiver:3001/api/alert?stream=Network"
+        send_resolved: true
+  - name: email
+    email_configs:
+      - to: list@yourdomain.com
+        send_resolved: true
+        from: alert@yourdomain.com
+        smarthost: smtp-relay.sendinblue.com:587
+        auth_username: user@yourdomain.com
+        auth_identity: user@yourdomain.com
+        auth_password: 4jdisCHl043S2rNi

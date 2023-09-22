@@ -1,0 +1,14 @@
+route:
+  group_by: ["service"]
+  receiver: "email"
+
+receivers:
+  - name: email
+    email_configs:
+      - to: list@yourdomain.com
+        send_resolved: true
+        from: alert@yourdomain.com
+        smarthost: smtp-relay.sendinblue.com:587
+        auth_username: user@yourdomain.com
+        auth_identity: user@yourdomain.com
+        auth_password: 4jdisCHl043S2rNi
