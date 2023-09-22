@@ -1,1 +1,43 @@
-<mxfile host="app.diagrams.net" modified="2023-09-21T08:32:30.315Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="8CCrOPwCZ_OHPwMiZJBA" version="20.8.13" type="device"><diagram name="Page-1" id="5A7zkfczt4YYJ_bEgNRd">7ZdNc5swEIZ/Dcd0AAEmx9RxmkMb10Nn2ltHgQ1oLCMiRGz86ysi8Smndj1Jc8nJ8Gr1Cp7dlbCF5pvdF46L7BtLgFqunewsdG25ruMEofxplFopM3SphJSTRAf1QkT2oEVbqxVJoBwFCsaoIMVYjFmeQyxGGuacbcdhD4yOVy1wCoYQxZia6k+SiEypoW/3+i2QNGtXdmw9ssFtsBbKDCdsO5DQwkJzzphQV5vdHGgDr+Wi5t28MNo9GIdcnDIhWq9ufAqPj79+k8vVbL+vVvGFdnnCtNIvvA7Li7vl9UKPlKJuUXBW5Qk0bo6FPm8zIiAqcNyMbmXypZaJDdXD2he4gN2LD+x0GGT9ANuA4LUM0RO6Gqhbtr663/aJ6OhmgyTMtIZ17tPOuscjLzShf6DlGrQiZGCSeS6ay7imRPLi6Dise0X2630n4HidPvNeVkLagNZL1R8SxKsQDtwxYdezDcLBAcDhWwFGBmADL+TJVdPXDWGKy5LEDReBuTDlAeK+eO2OHSRG7x8lNyDjHyDTahwoFuRpbH8Il17hOyNy4S4xnjcpfc/75I9NSlbxGPS8YdtPrHz/qJWEl4IwrJ4z2L36+Un1jKT+uL26W0bvvsH4s+MbjHNogwneqv79j/pXgNFkY0JnVn8wbaTwtNqXLHE9CCuagPIvDzzdSW1/UgzK8VUbKzCqRX6EPeAcv3tneVMcoXmw/N/Omn10lrKZfFQZxE8+V4KJkTMxOvtUkbf9V7EK7/9boMUf</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-09-21T20:04:33.294Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="xVTG-ocmmOM8jfET6BVh" version="21.8.0" type="device">
+  <diagram name="Page-1" id="5A7zkfczt4YYJ_bEgNRd">
+    <mxGraphModel dx="1364" dy="771" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SkQF5leqqX_i9Q7zzuQc-1" value="Prometheus Instance" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="115" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="SkQF5leqqX_i9Q7zzuQc-2" value="EBS" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="570" y="115" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SkQF5leqqX_i9Q7zzuQc-3" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="149.5" as="sourcePoint" />
+            <mxPoint x="550" y="149.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E8QFrtytmiw1M9-GCLOF-1" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#005F4B;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam2.network_proxy;" vertex="1" parent="1">
+          <mxGeometry x="288" y="280" width="64" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E8QFrtytmiw1M9-GCLOF-2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="E8QFrtytmiw1M9-GCLOF-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="235" as="sourcePoint" />
+            <mxPoint x="320" y="185" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E8QFrtytmiw1M9-GCLOF-3" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="400" as="sourcePoint" />
+            <mxPoint x="320" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E8QFrtytmiw1M9-GCLOF-4" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.certificate_manager;" vertex="1" parent="1">
+          <mxGeometry x="370" y="290.83000000000004" width="29" height="38.34" as="geometry" />
+        </mxCell>
+        <mxCell id="E8QFrtytmiw1M9-GCLOF-5" value="curl https://my-prometheus.com -u &quot;login:password&quot;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="410" width="318" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
